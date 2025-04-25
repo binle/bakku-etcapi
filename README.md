@@ -1,3 +1,5 @@
+### **_For make sure the latest document, Please refer document in git [etcapi](https://github.com/binle/bakku-etcapi)_**
+
 # 1. Overview
 
 EtcAPA is a simple library (it can be considered as a framework) for creating APIs. The target is help developer create APIs easiest.
