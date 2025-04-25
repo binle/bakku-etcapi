@@ -16,11 +16,21 @@ We use [reflect-metadata](https://rbuckton.github.io/reflect-metadata/) library 
 ![Request Response](./docs/bakku-etcapi.drawio.png)
 This library (framework) work as this image.
 
-# 3. Sample
+# 3. Use & Sample
 
-Please see source code [sample](./sample-etcapi/)
+### 3.1 Use
+
+&emsp;&emsp;npm: `npm install @bakku/etcapi`
+
+&emsp;&emsp;yarn: `yarn install @bakku/etcapi`
+
+### 3.2 Sample
+
+Please see the [sample source code](./sample-etcapi/)
 
 # 4. Documents
+
+[All documents](https://github.com/binle/bakku-etcapi/tree/main/docs)
 
 ### 4.1 Anotaions
 
