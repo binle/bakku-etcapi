@@ -1,4 +1,4 @@
-### **_For make sure the latest document, Please refer document in git [etcapi](https://github.com/binle/bakku-etcapi)_**
+### **_For make sure the latest documents, Please refer documents in git [etcapi](https://github.com/binle/bakku-etcapi)_**
 
 # 1. Overview
 
