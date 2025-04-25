@@ -14,9 +14,9 @@
 
 3. Sample
 
-Source code [sample](./sample-etcapi/)
+Please see source code [sample](./sample-etcapi/)
 
-4. Document
+4. Documents
 
 4.1 Anotaions
 
