@@ -2,7 +2,7 @@
 
 # 1. Overview
 
-EtcAPA is a simple library (it can be considered as a framework) for creating APIs. The target is help developer create APIs easiest.
+EtcApi is a part of Bakku framework, it will help developer create APIs easiest.
 
 We use [reflect-metadata](https://rbuckton.github.io/reflect-metadata/) library for creating it. It works base on [expressjs](https://expressjs.com/) and it is similar with Spring Framework with anotations:
 
@@ -64,6 +64,12 @@ Please see the [sample source code](./sample-etcapi/)
 - [Schema](./docs/class-schema.md)
 - [Validation](./docs/validate.md)
 
-```
+---
 
-```
+# NOTE: we will improve and develope other part of bakku platform in the future
+
+- **for intergration with database**, we recoment use [typeorm](https://typeorm.io/)
+- **for using socket**, we recomment use [socket.io](https://socket.io/)
+- if you have any idear or problem, please create issue, we will try to resolve it.
+
+# Thank you very much!

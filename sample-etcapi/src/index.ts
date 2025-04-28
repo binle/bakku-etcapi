@@ -1,4 +1,4 @@
-import { Application, IApplication, TypeServerOptions, BakkuFramework } from '@bakku/etcapi';
+import { Application, IApplication, BakkuFramework } from '@bakku/etcapi';
 import express from 'express';
 import ejs from 'ejs';
 import path from 'path';

@@ -130,6 +130,7 @@ class UserController {
   //================================================================================================
   @Post(':id/profile', { bodyContentType: 'multipart/form-data', description: 'Save user profile.' })
   @ProfileMulterMiddleware({ single: { name: 'avartarFile' } })
+  @AdminPermissonMiddleware()
   @ResponseSuccessSchema({ propertyType: UserDto })
   async saveUserProfile(@Body() body: ProfileRequestBodyDto): Promise<UserDto> {
     // body.avartarFile =>  req.file

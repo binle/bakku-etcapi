@@ -489,6 +489,7 @@ class SampleConfiguration extends DefaultApplicationConfiguration {
       .configure(bakkuConfiguration)
       .addFilter(new DetectUserFilter())
       .addFilter(new AuthorizedUserFilter());
+    // or super.configure(bakkuConfiguration).addFilter(new DetectUserFilter(), new AuthorizedUserFilter());
     return bakkuConfiguration;
   }
 }

@@ -25,8 +25,7 @@ class SampleConfiguration extends DefaultApplicationConfiguration {
     super
       .configure(bakkuConfiguration)
       .setCorsHandlerGlobal(this.getDefaultCorsHandler(['*']))
-      .addFilter(new DetectUserFilter())
-      .addFilter(new AuthorizedUserFilter())
+      .addFilter(new DetectUserFilter(), new AuthorizedUserFilter())
       .setDocumentPath('doc')
       .setGenerateDocumentHandler(this.getDocumentHandler(bakkuConfiguration.getConfiguration().documentPath as string))
       .setSwaggerDocumentPath('swagger')
