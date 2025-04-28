@@ -7,7 +7,7 @@ import {
   StringSchema,
 } from '@bakku/etcapi';
 
-@Controller({ name: 'HealthController', path: 'health' })
+@Controller({ name: 'HealthController', path: 'health', useLogger: true })
 class HealthController {
   logger: ILogger;
   _bakku_logger_file = __filename;
@@ -23,7 +23,6 @@ class HealthController {
 
   @Get('hello', { hideInDoc: true })
   @ResponseCustomDataHandler((data, response) => {
-    console.log('--- ResponseCustomDataHandler -- ');
     response.render('hello.html', data);
   })
   hello() {

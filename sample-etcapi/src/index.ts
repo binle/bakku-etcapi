@@ -1,23 +1,27 @@
-import { startServer, TypeServerOptions } from '@bakku/etcapi';
+import { Application, IApplication, TypeServerOptions, BakkuFramework } from '@bakku/etcapi';
+import express from 'express';
 import ejs from 'ejs';
 import path from 'path';
-import { initialization } from './app';
+import './app';
 import './processes';
 import './routers';
 
 ejs.delimiter = '@';
 
-(async () => {
-  await initialization(__dirname);
-  const options: TypeServerOptions = {
-    port: Number(global.applicationContexts.resource.port),
-  };
-  const { bakkuApplication } = startServer(options);
-  bakkuApplication.getExpressApp().disable('x-powered-by');
-  bakkuApplication.getExpressApp().engine('html', ejs.renderFile);
-  console.log(path.join(__dirname, 'views'));
-  bakkuApplication.getExpressApp().set('views', path.join(__dirname, 'views'));
-})().catch((error) => {
-  console.error('server error ========', error);
-  // stopServer(server);
-});
+@Application()
+class DemoApplication implements IApplication {
+  beforeStartApplication(): void | Promise<void> {
+    const expressApp = BakkuFramework.getBakkuFramework().getExpressApp();
+    expressApp.use(express.static(path.join(__dirname, 'public')));
+  }
+
+  afterStarttApplication(): void | Promise<void> {
+    const expressApp = BakkuFramework.getBakkuFramework().getExpressApp();
+    expressApp.disable('x-powered-by');
+    expressApp.engine('html', ejs.renderFile);
+    expressApp.set('views', path.join(__dirname, 'views'));
+
+    const resourceData = BakkuFramework.getBakkuFramework().getResourceData();
+    console.log(` === application is starting at port ${resourceData.port}====`);
+  }
+}

@@ -102,6 +102,7 @@ class SampleConfiguration extends DefaultApplicationConfiguration {
 
   private getErrorHandler() {
     return (err: Error, _req: Request, res: Response, _next: NextFunction): void => {
+      console.log('getErrorHandler======================', err);
       const error = err as IBakkuHttpError;
       const status = error.status || 500;
       const message = status < 500 ? error.message : 'Internal Server Error';

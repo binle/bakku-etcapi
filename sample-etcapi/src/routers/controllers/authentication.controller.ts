@@ -16,10 +16,9 @@ import {
   ResetPasswordRequestBodyDto,
 } from 'src/definitions';
 
-@Controller({ name: 'AuthenticationController', path: 'auth' })
+@Controller({ name: 'AuthenticationController', path: 'auth', useLogger: true })
 class AuthenticationController {
   logger: ILogger;
-  _bakku_logger_file = __filename;
 
   //================================================================================================
   @Post('login')

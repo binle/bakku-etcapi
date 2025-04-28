@@ -52,10 +52,9 @@ const AdminPermissonMiddleware = () => {
   });
 };
 
-@Controller({ name: 'UserController', path: 'user' })
+@Controller({ name: 'UserController', path: 'user', useLogger: true })
 class UserController {
   logger: ILogger;
-  _bakku_logger_file = __filename;
 
   //================================================================================================
   @Get('filter')

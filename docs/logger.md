@@ -15,7 +15,7 @@ class TestConfiguration {
 ```
 
 ```
-@Controller
+@Controller({name: 'TestController', useLogger: true })
 class TestController {
   private logger : Ilooger;
 
@@ -40,16 +40,23 @@ class TestService {
 
 # 2. Special log with file name
 
-define `logger : Ilooger` in the injected class. it will auto set when app run.
+you have process two steps:
+
+- define `useLogger: true` in injected param of class (apply for anotation : Controller, Service, Application, Configuration)
+- define property `logger : Ilooger` into the injected class. it will auto set when app run and you can use
+- define property `_bakku_logger_file` into the injected class to get more log info
+  - `_bakku_logger_file = __filename` display full js file path in the log message: : `'2025-01-01 00:00:00.000 INFO   [..path to js file..]/TestController.js    message: {} '`
+  - `_bakku_logger_file = [your prefix]` display full js file path in the log message: `'2025-01-01 00:00:00.000 INFO   [your prefix]    message: {} '`
+  - not defile, it will auto get the class name `'2025-01-01 00:00:00.000 INFO   TestController    log data: {}'`
 
 ```
-@Controller
+@Controller({name: 'TestController', useLogger: true })
 class TestController {
   private logger : Ilooger;
 
   doSomeThings() {
     const dataLog = {};
-    this.logger.info('log data:', data);
+    this.logger.info('log data:', data); // => `2025-01-01 00:00:00.000 INFO   TestController    log data: {} `
     // log content:
     // [dateTime] [level] TestController  log data:
     // data
@@ -58,15 +65,15 @@ class TestController {
 ```
 
 ```
-@Controller
+@Controller({name: 'TestController', useLogger: true })
 class TestController {
   private logger : Ilooger;
-  private _bakku_logger_file = __filename; => prefix
+  private _bakku_logger_file = __filename;  // => prefix in the logger
 
 
   doSomeThings() {
     const dataLog = {};
-    this.logger.info('message', data);
+    this.logger.info('message', data); // => '2025-01-01 00:00:00.000 INFO   [..path to js file..]/testController.js    message: {} '
     // log content:
     // [dateTime] [level] [path]/[to]/[file]/TestController.ts  log data:
     // data
@@ -81,7 +88,7 @@ class TestController {
   const logger = createLogger(prefix, options);
 ```
 
-**prefix**: string => is bakku_logger_file in injected class.
+**prefix**: string => is `_bakku_logger_file` in injected class.
 **options:**
 
 | index | name          |                type                | description                         |

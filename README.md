@@ -26,6 +26,25 @@ This library (framework) work as this image.
 
 ### 3.2 Sample
 
+- Declaration @Application
+
+```
+import {Application} from '@bakku/etcapi';
+
+@Application
+class Application() {
+
+}
+```
+
+- Use directive
+
+```
+import {BakkuFramework} from '@bakku/etcapi';
+
+BakkuFramework.start(); ==> locahost:8080
+```
+
 Please see the [sample source code](./sample-etcapi/)
 
 # 4. Documents
@@ -44,3 +63,7 @@ Please see the [sample source code](./sample-etcapi/)
 - [Logger](./docs/logger.md)
 - [Schema](./docs/class-schema.md)
 - [Validation](./docs/validate.md)
+
+```
+
+```

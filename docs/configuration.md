@@ -531,16 +531,12 @@ class AuthorizedUserFilter implements IApplicationFilter {
 
 ### 2.14 Self setting the express application
 
-- using `getExpressApp` from `bakkuApplication` after start server for get Express Application and setting it.
+- using `getExpressApp` from `BakkuFramework` after start server for get Express Application and setting it.
 
 ```
-const options: TypeServerOptions = {
-  port: Number(global.applicationContexts.resource.port),
-};
-const { bakkuApplication } = startServer(options);
 // EX:  disable x-powered-by
-bakkuApplication.getExpressApp().disable('x-powered-by');
-// setting other with bakkuApplication.getExpressApp() if need
+BakkuFramework.getBakkuFramework().getExpressApp().disable('x-powered-by');
+// setting other with BakkuFramework.getBakkuFramework().getExpressApp() if need
 
 ```
 
@@ -552,11 +548,9 @@ ejs.delimiter = '@';
 const options: TypeServerOptions = {
   port: Number(global.applicationContexts.resource.port),
 };
-const { bakkuApplication } = startServer(options);
-bakkuApplication.getExpressApp().disable('x-powered-by');
 // EX: setting server side render via ejs
-bakkuApplication.getExpressApp().engine('html', ejs.renderFile);
-bakkuApplication.getExpressApp().set('views', path.join(__dirname, 'views'));
+BakkuFramework.getBakkuFramework().getExpressApp().engine('html', ejs.renderFile);
+BakkuFramework.getBakkuFramework().getExpressApp().set('views', path.join(__dirname, 'views'));
 
 
 //

@@ -1,4 +1,3 @@
-export {};
 export const initialization = (rootPath: string): void => {
   global.applicationContexts = {
     resource: {

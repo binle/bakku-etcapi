@@ -35,10 +35,9 @@ const storage = multer.diskStorage({
 const FileMulterMiddleware = (optionData: IMulterInjectedParams) =>
   MulterMiddleware({ ...optionData, options: { storage } });
 
-@Controller({ name: 'FileController', path: 'file' })
+@Controller({ name: 'FileController', path: 'file', useLogger: true })
 class FileController {
   logger: ILogger;
-  _bakku_logger_file = __filename;
 
   //================================================================================================
   @Post('upload/one', { bodyContentType: 'multipart/form-data' })
