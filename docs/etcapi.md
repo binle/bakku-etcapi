@@ -2,7 +2,7 @@
 
 &emsp;&emsp;npm: `npm install @bakku/etcapi`
 
-&emsp;&emsp;yarn: `yarn install @bakku/etcapi`
+&emsp;&emsp;yarn: `yarn add @bakku/etcapi`
 
 # 2 Use
 
@@ -71,7 +71,7 @@ class DemoApplication implement IApplication {
 
 # 3 Environment, resouces
 
-- By default, you can set the resouce config to the evironment of nodejs(process.env), refer - [environment-variables-from-nodejs](https://nodejs.org/en/learn/command-line/how-to-read-environment-variables-from-nodejs)
+- By default, you can set the resource config to the evironment of nodejs(process.env), refer - [environment-variables-from-nodejs](https://nodejs.org/en/learn/command-line/how-to-read-environment-variables-from-nodejs)
 
 - Use resouce json file, use RESOURCE_FILE_PATH in node environment (process.env.RESOURCE_FILE_PATH). When you pass this property in node environment, we will prefer to read the data from `RESOURCE_FILE_PATH`. Note: It has been json file.
 - ![Request Response](./bakku-etcapi-resoucepng.png)

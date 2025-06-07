@@ -469,7 +469,7 @@ class SampleConfiguration extends DefaultApplicationConfiguration {
 
 - add filter process for your server.
 
-**TypeServerOptions:**
+**IApplicationFilter:**
 
 | name           | type                         | required | default | description                                                           |
 | :------------- | :--------------------------- | :------- | :------ | :-------------------------------------------------------------------- |
@@ -546,9 +546,6 @@ BakkuFramework.getBakkuFramework().getExpressApp().disable('x-powered-by');
 ```
 import ejs from 'ejs';
 ejs.delimiter = '@';
-const options: TypeServerOptions = {
-  port: Number(global.applicationContexts.resource.port),
-};
 // EX: setting server side render via ejs
 BakkuFramework.getBakkuFramework().getExpressApp().engine('html', ejs.renderFile);
 BakkuFramework.getBakkuFramework().getExpressApp().set('views', path.join(__dirname, 'views'));

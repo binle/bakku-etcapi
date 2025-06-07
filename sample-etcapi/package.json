@@ -6,7 +6,7 @@
     "build": "rm -rf dist && tsc && tsc-alias",
     "cp-view": "cp -r ./src/views ./dist",
     "cp-public": "cp -r ./src/public ./dist",
-    "start": "npm run build && npm run cp-view && npm run cp-public && node ./dist/index.js"
+    "start": "npm run build && npm run cp-view && npm run cp-public && node --env-file=.env ./dist/index.js"
   },
   "author": "",
   "license": "ISC",

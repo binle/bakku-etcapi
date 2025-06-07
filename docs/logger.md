@@ -98,3 +98,13 @@ class TestController {
 | 3     | filename      |               string               | name of log file                    |
 | 4     | maxFileSize   |               number               | number file will be store in folder |
 | 5     | maxNumberFile |               number               | maximum file size of each file      |
+
+**Config for all logger**
+
+when you have configuration and want to apply for all lggers, you can use `configGlobalLogger`
+
+```
+import { configGlobalLogger } from '@bakku/etcapi';
+// detect options
+configGlobalLogger(options);
+```
