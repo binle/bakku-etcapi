@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import {
+  BakkuResource,
   Configuration,
   ControllerMethodPath,
   convertToSwaggerJson,
@@ -23,11 +24,24 @@ class SampleConfiguration extends DefaultApplicationConfiguration {
 
   configure(bakkuConfiguration: IBakkuConfiguration): IBakkuConfiguration {
     super
+
       .configure(bakkuConfiguration)
-      .setCorsHandlerGlobal(this.getDefaultCorsHandler(['*']))
+      // NOTE: in DefaultApplicationConfiguration  api prefix is "api",
+      //  call to re-set it if you want to overwrite
+      // .setApiPrefix('api')
+
+      // NOTE: setNotFoundHandlerGlobal already exist in default value, which return 404,
+      //  re-set it if you want to overwrite
+      // .setNotFoundHandlerGlobal(this.getNotfoundHandler())
+      .setCorsHandlerGlobal(this.getDefaultCorsHandler(BakkuResource.getResouceData().whitelist || ['*']))
       .addFilter(new DetectUserFilter(), new AuthorizedUserFilter())
+
       .setDocumentPath('doc')
-      .setGenerateDocumentHandler(this.getDocumentHandler(bakkuConfiguration.getConfiguration().documentPath as string))
+      // NOTE: setGenerateDocumentHandler already exist in DefaultApplicationConfiguration,
+      //  re-set it if you want to overwrite
+      // .setGenerateDocumentHandler(
+      //    this.getDocumentHandler(bakkuConfiguration.getConfiguration().documentPath as string))
+
       .setSwaggerDocumentPath('swagger')
       .setGenerateSwaggerDocumentHandlers(
         this.getSwaggerDocumentHandler(bakkuConfiguration.getConfiguration().swaggerDocumentPath as string)

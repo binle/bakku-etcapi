@@ -465,7 +465,7 @@ class SampleConfiguration extends DefaultApplicationConfiguration {
 }
 ```
 
-### 2.13 addFilter(filter: IApplicationFilter): IBakkuConfiguration
+### 2.13 addFilter(...filter: IApplicationFilter): IBakkuConfiguration
 
 - add filter process for your server.
 

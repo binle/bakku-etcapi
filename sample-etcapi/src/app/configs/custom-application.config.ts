@@ -34,12 +34,15 @@ class SampleConfiguration extends DefaultApplicationConfiguration {
   configure(bakkuConfiguration: IBakkuConfiguration): IBakkuConfiguration {
     super
       .configure(bakkuConfiguration)
+      .setNotFoundHandlerGlobal(this.getNotfoundHandler())
       .setCorsHandlerGlobal(this.getDefaultCorsHandler(['*']))
       .setResponseDataHandlerGlobal(this.getReponseDataHandler())
       .setErrorHandlerGlobal(this.getErrorHandler())
       .addFilter(new DetectUserFilter(), new AuthorizedUserFilter())
       .setDocumentPath('doc')
-      .setGenerateDocumentHandler(this.getDocumentHandler(bakkuConfiguration.getConfiguration().documentPath as string))
+      // setGenerateDocumentHandler already exist in DefaultApplicationConfiguration
+      // .setGenerateDocumentHandler(
+      //    this.getDocumentHandler(bakkuConfiguration.getConfiguration().documentPath as string))
       .setSwaggerDocumentPath('swagger')
       .setGenerateSwaggerDocumentHandlers(
         this.getSwaggerDocumentHandler(bakkuConfiguration.getConfiguration().swaggerDocumentPath as string)

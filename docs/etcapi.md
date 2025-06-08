@@ -52,18 +52,18 @@ import {BakkuFramework, IApplication, Application} from '@bakku/etcapi';
 @Application
 class DemoApplication implement IApplication {
   beforeStartApplication(): void | Promise<void> {
-    const expressApp = BakkuFramework.getBakkuFramework().getExpressApp();
+    const expressApp = BakkuFramework.getExpressApp();
     expressApp.use(express.static(path.join(__dirname, 'public')));
     // if you have some static folder, you have to set in this function
   }
 
   afterStarttApplication(): void | Promise<void>{
-    const expressApp = BakkuFramework.getBakkuFramework().getExpressApp();
+    const expressApp = BakkuFramework.getExpressApp();
     expressApp.disable('x-powered-by');
     expressApp.engine('html', ejs.renderFile);
     expressApp.set('views', path.join(__dirname, 'views'));
 
-    const resourceData = BakkuFramework.getBakkuFramework().getResourceData();
+    const resourceData = BakkuFramework.getResourceData();
     console.log(` === application is starting at port ${resourceData.port }====`);
   }
 }
@@ -76,4 +76,4 @@ class DemoApplication implement IApplication {
 - Use resouce json file, use RESOURCE_FILE_PATH in node environment (process.env.RESOURCE_FILE_PATH). When you pass this property in node environment, we will prefer to read the data from `RESOURCE_FILE_PATH`. Note: It has been json file.
 - ![Request Response](./bakku-etcapi-resoucepng.png)
 
-- The resource data will be keep `BakkuFramework.getBakkuFramework().getResourceData()`
+- The resource data will be keep `BakkuFramework.getResourceData()`
