@@ -26,7 +26,7 @@ class SampleConfiguration extends DefaultApplicationConfiguration {
     super
 
       .configure(bakkuConfiguration)
-      // NOTE: in DefaultApplicationConfiguration  api prefix is "api",
+      // NOTE: default api prefix is "",
       //  call to re-set it if you want to overwrite
       // .setApiPrefix('api')
 

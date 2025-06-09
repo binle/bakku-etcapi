@@ -69,7 +69,8 @@ class SampleConfiguration extends DefaultApplicationConfiguration {
 
 set prefix path for all APIs in your controllers.
 
-- in `DefaultApplicationConfiguration`, the default prefix is `api`, so all APIs will have prefix `api` in the first url path. EX: `[domain]/api/user`, `[domain]/api/login` ...
+- the default prefix is empty,
+- if you set prefix `api`, so all APIs will have prefix `api` in the first url path. EX: `[domain]/api/user`, `[domain]/api/login` ...
 
 ```
 @Configuration()
