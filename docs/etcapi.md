@@ -40,7 +40,7 @@ BakkuFramework.start(); ==> locahost:8080
 ```
 interface IApplication {
   beforeStartApplication?(): void | Promise<void>;
-  afterStarttApplication?(): void | Promise<void>;
+  afterStartApplication?(): void | Promise<void>;
 }
 ```
 
@@ -57,7 +57,7 @@ class DemoApplication implement IApplication {
     // if you have some static folder, you have to set in this function
   }
 
-  afterStarttApplication(): void | Promise<void>{
+  afterStartApplication(): void | Promise<void>{
     const expressApp = BakkuFramework.getExpressApp();
     expressApp.disable('x-powered-by');
     expressApp.engine('html', ejs.renderFile);

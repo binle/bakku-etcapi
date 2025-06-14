@@ -16,7 +16,7 @@ class DemoApplication implements IApplication {
     expressApp.use(express.static(path.join(__dirname, 'public')));
   }
 
-  afterStarttApplication() {
+  afterStartApplication() {
     const expressApp = BakkuFramework.getExpressApp();
     expressApp.disable('x-powered-by');
     expressApp.engine('html', ejs.renderFile);
