@@ -33,7 +33,7 @@ class SampleConfiguration extends DefaultApplicationConfiguration {
       // NOTE: setNotFoundHandlerGlobal already exist in default value, which return 404,
       //  re-set it if you want to overwrite
       // .setNotFoundHandlerGlobal(this.getNotfoundHandler())
-      .setCorsHandlerGlobal(this.getDefaultCorsHandler(BakkuResource.getResouceData().whitelist || ['*']))
+      .setCorsHandlerGlobal(this.getDefaultCorsHandler(BakkuResource.getResourceData().whitelist || ['*']))
       .addFilter(new DetectUserFilter(), new AuthorizedUserFilter())
 
       .setDocumentPath('doc')

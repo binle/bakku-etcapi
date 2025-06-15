@@ -1,6 +1,6 @@
 import { DataArrayProperty, DataFileProperty, DataProperty, StringSchema } from '@bakku/etcapi/dist/src';
 
-export class FileUploadOneyRequestBodyDto {
+export class FileUploadOneRequestBodyDto {
   @DataFileProperty()
   oneFile: Express.Multer.File;
   @DataProperty()
@@ -12,12 +12,12 @@ export class FileUploadOneResponseBodyDto {
   filepath: string;
 }
 
-export class FileUploadListyRequestBodyDto {
+export class FileUploadListRequestBodyDto {
   @DataProperty({ itemSchema: { type: 'file' }, validation: { isRequired: true, minLength: 1 } })
   listFiles: Express.Multer.File[];
 }
 
-export class FileUploaListResponseBodyDto {
+export class FileUploadListResponseBodyDto {
   @DataArrayProperty({ itemSchema: StringSchema })
   filepath: string[];
 }
@@ -29,7 +29,7 @@ export class FileUploadMapRequestBodyDto {
   map2: Express.Multer.File[];
 }
 
-export class FileUploaMapResponseBodyDto {
+export class FileUploadMapResponseBodyDto {
   @DataArrayProperty({ itemSchema: StringSchema })
   map1: string[];
   @DataArrayProperty({ itemSchema: StringSchema })

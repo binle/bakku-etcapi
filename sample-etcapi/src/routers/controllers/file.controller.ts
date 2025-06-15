@@ -1,25 +1,15 @@
-import {
-  Body,
-  Controller,
-  Get,
-  ILogger,
-  IMulterInjectedParams,
-  MulterMiddleware,
-  Params,
-  Post,
-  ResponseCustomDataHandler,
-  ResponseSuccessSchema,
-} from '@bakku/etcapi';
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { Body, Controller, Get, ILogger, IMulterInjectedParams, Params, Post } from '@bakku/etcapi';
 import multer from 'multer';
 import path from 'path';
 import { Response } from 'express';
 import {
-  FileUploadListyRequestBodyDto,
+  FileUploadListRequestBodyDto,
   FileUploadMapRequestBodyDto,
   FileUploadOneResponseBodyDto,
-  FileUploadOneyRequestBodyDto,
-  FileUploaListResponseBodyDto,
-  FileUploaMapResponseBodyDto,
+  FileUploadOneRequestBodyDto,
+  FileUploadListResponseBodyDto,
+  FileUploadMapResponseBodyDto,
   RequestParams,
 } from 'src/definitions';
 import { createReadStream } from 'fs';
@@ -32,55 +22,60 @@ const storage = multer.diskStorage({
     cb(null, file.fieldname);
   },
 });
-const FileMulterMiddleware = (optionData: IMulterInjectedParams) =>
-  MulterMiddleware({ ...optionData, options: { storage } });
+const options = { storage };
 
 @Controller({ name: 'FileController', path: 'file', useLogger: true })
 class FileController {
   logger: ILogger;
 
   //================================================================================================
-  @Post('upload/one', { bodyContentType: 'multipart/form-data' })
-  @FileMulterMiddleware({ single: { name: 'oneFile' } })
-  async uploadOne(@Body() body: FileUploadOneyRequestBodyDto): Promise<FileUploadOneResponseBodyDto> {
+  @Post('upload/one', {
+    multer: { single: { name: 'oneFile' }, options },
+    bodyContentType: 'multipart/form-data',
+  })
+  async uploadOne(@Body() body: FileUploadOneRequestBodyDto): Promise<FileUploadOneResponseBodyDto> {
     this.logger.info('FileController == uploadOne', { body });
     // TODO
     return null as any;
   }
   //================================================================================================
-  @Post('upload/list', { bodyContentType: 'multipart/form-data' })
-  @FileMulterMiddleware({ array: { name: 'listFiles' } })
-  async uploadList(@Body() body: FileUploadListyRequestBodyDto): Promise<FileUploaListResponseBodyDto> {
+  @Post('upload/list', {
+    multer: { array: { name: 'listFiles' }, options },
+    bodyContentType: 'multipart/form-data',
+  })
+  async uploadList(@Body() body: FileUploadListRequestBodyDto): Promise<FileUploadListResponseBodyDto> {
     this.logger.info('FileController == login', { body });
     // TODO
     return null as any;
   }
   //================================================================================================
-  @Post('upload/map', { bodyContentType: 'multipart/form-data' })
-  @FileMulterMiddleware({
-    fields: [
-      {
-        name: 'map1',
-      },
-      { name: 'map2' },
-    ],
+  @Post('upload/map', {
+    bodyContentType: 'multipart/form-data',
+    multer: {
+      fields: [
+        {
+          name: 'map1',
+        },
+        { name: 'map2' },
+      ],
+      options,
+    },
   })
-  async uploadMap(@Body() body: FileUploadMapRequestBodyDto): Promise<FileUploaMapResponseBodyDto> {
+  async uploadMap(@Body() body: FileUploadMapRequestBodyDto): Promise<FileUploadMapResponseBodyDto> {
     this.logger.info('FileController == login', { body });
     // TODO
     return null as any;
   }
 
   //================================================================================================
-  @Get(':id')
-  @ResponseCustomDataHandler((filePath: string, res: Response) => {
-    createReadStream(filePath).pipe(res);
+  @Get(':id', {
+    customSuccessHandler: (filePath: string, res: Response) => createReadStream(filePath).pipe(res),
+    successSchema: { description: 'file data' },
   })
-  @ResponseSuccessSchema({ description: 'file data', useDifferentResponse: true })
   async downloadFile(@Params() params: RequestParams) {
     this.logger.info('FileController == downloadFile', { params });
     let filePath = '';
-    // TODO
+    // do somethings
     filePath = 'TODO with params.id';
     return filePath;
   }

@@ -1,18 +1,9 @@
-import {
-  Body,
-  Controller,
-  HttpStatusCodes,
-  ILogger,
-  newBakkuHttpError,
-  Post,
-  ResponseErrorSchema,
-  ResponseSuccessSchema,
-} from '@bakku/etcapi';
+import { Body, Controller, HttpStatusCodes, ILogger, newBakkuHttpError, Post } from '@bakku/etcapi';
 import {
   ForgotPasswordRequestBodyDto,
   ForgotPasswordResponseBodyDto,
-  LoginReponseBodyDto,
   LoginRequestBodyDto,
+  LoginResponseBodyDto,
   ResetPasswordRequestBodyDto,
 } from 'src/definitions';
 
@@ -21,14 +12,15 @@ class AuthenticationController {
   logger: ILogger;
 
   //================================================================================================
-  @Post('login')
-  @ResponseSuccessSchema({ propertyType: LoginReponseBodyDto })
-  @ResponseErrorSchema([
-    newBakkuHttpError(HttpStatusCodes.BAD_REQUEST, { message: 'invalid user', code: 'invalid_user' }),
-    newBakkuHttpError(HttpStatusCodes.BAD_REQUEST, { message: 'invalid password', code: 'invalid_password' }),
-    newBakkuHttpError(HttpStatusCodes.BAD_REQUEST, { message: 'user is not active', code: 'inactive_user' }),
-  ])
-  async login(@Body() body: LoginRequestBodyDto): Promise<LoginReponseBodyDto> {
+  @Post('login', {
+    successSchema: { propertyType: LoginResponseBodyDto },
+    errorData: [
+      newBakkuHttpError(HttpStatusCodes.BAD_REQUEST, { message: 'invalid user', code: 'invalid_user' }),
+      newBakkuHttpError(HttpStatusCodes.BAD_REQUEST, { message: 'invalid password', code: 'invalid_password' }),
+      newBakkuHttpError(HttpStatusCodes.BAD_REQUEST, { message: 'user is not active', code: 'inactive_user' }),
+    ],
+  })
+  async login(@Body() body: LoginRequestBodyDto): Promise<LoginResponseBodyDto> {
     this.logger.info('AuthenticationController == login', { body });
     // TODO
     return {
@@ -37,9 +29,10 @@ class AuthenticationController {
   }
 
   //================================================================================================
-  @Post('forgot-password')
-  @ResponseSuccessSchema({ propertyType: ForgotPasswordResponseBodyDto })
-  @ResponseErrorSchema([newBakkuHttpError(HttpStatusCodes.BAD_REQUEST)])
+  @Post('forgot-password', {
+    successSchema: { propertyType: ForgotPasswordResponseBodyDto },
+    errorData: [newBakkuHttpError(HttpStatusCodes.BAD_REQUEST)],
+  })
   async forgotPassword(@Body() body: ForgotPasswordRequestBodyDto): Promise<ForgotPasswordResponseBodyDto> {
     this.logger.info('AuthenticationController == forgotPassword', { body });
     // TODO
@@ -47,8 +40,7 @@ class AuthenticationController {
   }
 
   //================================================================================================
-  @Post('reset-password')
-  @ResponseErrorSchema([newBakkuHttpError(HttpStatusCodes.BAD_REQUEST)])
+  @Post('reset-password', { errorData: newBakkuHttpError(HttpStatusCodes.BAD_REQUEST) })
   async resetPassword(@Body() body: ResetPasswordRequestBodyDto): Promise<void> {
     this.logger.info('AuthenticationController == resetPassword', { body });
     // TODO

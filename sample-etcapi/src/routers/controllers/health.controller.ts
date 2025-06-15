@@ -1,19 +1,11 @@
-import {
-  Controller,
-  Get,
-  ILogger,
-  ResponseCustomDataHandler,
-  ResponseSuccessSchema,
-  StringSchema,
-} from '@bakku/etcapi';
+import { Controller, Get, ILogger, StringSchema } from '@bakku/etcapi';
 
 @Controller({ name: 'HealthController', path: 'health', useLogger: true })
 class HealthController {
   logger: ILogger;
   _bakku_logger_file = __filename;
 
-  @Get('check')
-  @ResponseSuccessSchema({ type: 'object', properties: { message: StringSchema } })
+  @Get('check', { successSchema: { type: 'object', properties: { message: StringSchema } } })
   healthCheck() {
     this.logger.info('HealthController == healthCheck');
     return {
@@ -21,9 +13,9 @@ class HealthController {
     };
   }
 
-  @Get('hello', { hideInDoc: true })
-  @ResponseCustomDataHandler((data, response) => {
-    response.render('hello.html', data);
+  @Get('hello', {
+    hideInDoc: true,
+    customSuccessHandler: (data, response) => response.render('hello.html', data),
   })
   hello() {
     this.logger.info('HealthController == hello');

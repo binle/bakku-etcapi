@@ -22,7 +22,7 @@ export class LoginRequestBodyDto {
   rememberMe?: boolean;
 }
 
-export class LoginReponseBodyDto {
+export class LoginResponseBodyDto {
   @DataProperty()
   jwt: string;
 }
