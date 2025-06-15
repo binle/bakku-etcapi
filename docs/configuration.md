@@ -1,8 +1,8 @@
-# 1. Overwview
+# 1. Overview
 
 - Use `@Configuration` in the configuration class to define configuration for your server.
 - There is only one class (with @Configuration) is allowed, if you have more than one, it will throw error.
-- The class must implement `IApplicationConfiguration`. in the best, you shoule be extends `AbstractApplicationConfiguration` or `DefaultApplicationConfiguration` and overwrite function if needed.
+- The class must implement `IApplicationConfiguration`. in the best, you should be extends `AbstractApplicationConfiguration` or `DefaultApplicationConfiguration` and overwrite function if needed.
 
 EX:
 
@@ -35,9 +35,10 @@ class SampleConfiguration extends AbstractApplicationConfiguration {
   private getCookieHandlerGlobal() {
     return cookieParser();
   }
+}
 ```
 
-### NOTE: all hanlders at above are implemented in `DefaultApplicationConfiguration`, you can extends `DefaultApplicationConfiguration` and continue process your config if need.
+### NOTE: all handlers at above are implemented in `DefaultApplicationConfiguration`, you can extends `DefaultApplicationConfiguration` and continue process your config if need.
 
 ```
 @Configuration()
@@ -46,7 +47,7 @@ class SampleConfiguration extends DefaultApplicationConfiguration {
     super();
   }
 
-  // config your hanlders if needed
+  // config your handlers if needed
   configure(bakkuConfiguration: IBakkuConfiguration): IBakkuConfiguration {
     super
       .configure(bakkuConfiguration)
@@ -55,12 +56,12 @@ class SampleConfiguration extends DefaultApplicationConfiguration {
   }
 
   private getNotfoundHandler() {
-    //Request, Reponse, NextFunction from express handler request.
-    return (_req: Request, _res: Reponse, _next: NextFunction) => {
+    //Request, Response, NextFunction from express handler request.
+    return (_req: Request, _res: Response, _next: NextFunction) => {
       throw newBakkuHttpError(HttpStatusCodes.NOT_FOUND, { message: 'page is not exist, please contact admin!' });
     };
   }
-
+}
 ```
 
 # 2 Configuration
@@ -79,18 +80,19 @@ class SampleConfiguration extends DefaultApplicationConfiguration {
     super();
   }
 
-  // config your hanlders if needed
+  // config your handlers if needed
   configure(bakkuConfiguration: IBakkuConfiguration): IBakkuConfiguration {
     super
       .configure(bakkuConfiguration)
       .setApiPrefix('sampleAPI'); // set your prefix => `[domain]/sampleAPI/user` `[domain]/sampleAPI/login`
     return bakkuConfiguration;
   }
+}
 ```
 
 ### 2.2 setCorsHandlerGlobal(handler: RequestHandler): IBakkuConfiguration
 
-- config your CORS hanlder, if you not set, it will re-use the default cors from `express`
+- config your CORS handler, if you not set, it will re-use the default cors from `express`
 
 ```
 @Configuration()
@@ -99,7 +101,7 @@ class SampleConfiguration extends DefaultApplicationConfiguration {
     super();
   }
 
-  // config your hanlders if needed
+  // config your handlers if needed
   configure(bakkuConfiguration: IBakkuConfiguration): IBakkuConfiguration {
     super
       .configure(bakkuConfiguration)
@@ -109,8 +111,8 @@ class SampleConfiguration extends DefaultApplicationConfiguration {
 
   private getDefaultCorsHandler(whitelist: string[]): RequestHandler {
     const whitelist = ['*'];
-    // whiteList should be get from resouce config.
-    // EX: whitelist = global.appResouces.corsWhiteList;
+    // whiteList should be get from resource config.
+    // EX: whitelist = global.appResources.corsWhiteList;
 
     const corsOptions: CorsOptions = {
       origin: (origin: string | undefined, callback: (err: Error | null, allow?: boolean) => void) => {
@@ -128,11 +130,12 @@ class SampleConfiguration extends DefaultApplicationConfiguration {
     };
     return cors(corsOptions);
   }
+}
 ```
 
 ### 2.3 setJSONParsingHandlerGlobal(handler: RequestHandler): IBakkuConfiguration
 
-- config your JSON parsing hanlder if needed, default it is not set.
+- config your JSON parsing handler if needed, default it is not set.
 - if your config extends `DefaultApplicationConfiguration`, the handler use `express.json()`
 
 ```
@@ -142,7 +145,7 @@ class SampleConfiguration extends DefaultApplicationConfiguration {
     super();
   }
 
-  // config your hanlders if needed
+  // config your handlers if needed
   configure(bakkuConfiguration: IBakkuConfiguration): IBakkuConfiguration {
     super
       .configure(bakkuConfiguration)
@@ -155,11 +158,12 @@ class SampleConfiguration extends DefaultApplicationConfiguration {
     const sampleOption = {...};
     return express.json(sampleOption);
   }
+}
 ```
 
 ### 2.4 setUrlEncodeHandlerGlobal(handler: RequestHandler): IBakkuConfiguration
 
-- config your Url encode hanlder if needed, default it is not set.
+- config your Url encode handler if needed, default it is not set.
 - if your config extends `DefaultApplicationConfiguration`, the handler use `express.urlencoded({ extended: true })`
 
 ```
@@ -169,7 +173,7 @@ class SampleConfiguration extends DefaultApplicationConfiguration {
     super();
   }
 
-  // config your hanlders if needed
+  // config your handlers if needed
   configure(bakkuConfiguration: IBakkuConfiguration): IBakkuConfiguration {
     super
       .configure(bakkuConfiguration)
@@ -181,11 +185,12 @@ class SampleConfiguration extends DefaultApplicationConfiguration {
     // apply your url encode parsing
     return express.urlencoded({extended: false});
   }
+}
 ```
 
 ### 2.5 setCookieHandlerGlobal(handler: RequestHandler): IBakkuConfiguration
 
-- config your Cookie hanlder if needed, default it is not set.
+- config your Cookie handler if needed, default it is not set.
 - if your config extends `DefaultApplicationConfiguration`, the handler use `cookie-parser` library - `cookieParser()`
 
 ```
@@ -195,7 +200,7 @@ class SampleConfiguration extends DefaultApplicationConfiguration {
     super();
   }
 
-  // config your hanlders if needed
+  // config your handlers if needed
   configure(bakkuConfiguration: IBakkuConfiguration): IBakkuConfiguration {
     super
       .configure(bakkuConfiguration)
@@ -207,11 +212,12 @@ class SampleConfiguration extends DefaultApplicationConfiguration {
     return cookieParser();
     // return cookieParser('secret', {...yourOption});
   }
+}
 ```
 
 ### 2.6 setNotFoundHandlerGlobal(handler: RequestHandler): IBakkuConfiguration
 
-- config your not found hanlder if needed, if you not set it, you have self do it in each API.
+- config your not found handler if needed, if you not set it, you have self do it in each API.
 - if your config extends `DefaultApplicationConfiguration`, the default handler is
 
 ```
@@ -229,7 +235,7 @@ class SampleConfiguration extends DefaultApplicationConfiguration {
     super();
   }
 
-  // config your hanlders if needed
+  // config your handlers if needed
   configure(bakkuConfiguration: IBakkuConfiguration): IBakkuConfiguration {
     super
       .configure(bakkuConfiguration)
@@ -239,15 +245,16 @@ class SampleConfiguration extends DefaultApplicationConfiguration {
 
   private getNotfoundHandler() {
     // apply your not found handler
-    return (_req: Request, _res: Reponse, _next: NextFunction) => {
+    return (_req: Request, _res: Response, _next: NextFunction) => {
       throw newBakkuHttpError(HttpStatusCodes.NOT_FOUND, { message: 'Page is not exist, please contact admin!' });
     };
   }
+}
 ```
 
 ### 2.7 setErrorHandlerGlobal(handler: ErrorRequestHandler): IBakkuConfiguration
 
-- config your error hanlder if needed, you have self do it in each API.
+- config your error handler if needed, you have self do it in each API.
 - in `DefaultApplicationConfiguration`, the default handler is
 
 ```
@@ -269,7 +276,7 @@ class SampleConfiguration extends DefaultApplicationConfiguration {
     super();
   }
 
-  // config your hanlders if needed
+  // config your handlers if needed
   configure(bakkuConfiguration: IBakkuConfiguration): IBakkuConfiguration {
     super
       .configure(bakkuConfiguration)
@@ -289,52 +296,7 @@ class SampleConfiguration extends DefaultApplicationConfiguration {
       res.status(status).json({ status, code, message, data });
     };
   }
-```
-
-### 2.7 setErrorHandlerGlobal(handler: ErrorRequestHandler): IBakkuConfiguration
-
-- config your error hanlder if needed, you have self do it in each API.
-- in `DefaultApplicationConfiguration`, the default handler is
-
-```
-  (error: IBakkuHttpError, _req: Request, res: Response, _next: NextFunction): void => {
-    const status = error.status || 500;
-    const message = status < 500 ? error.message : 'Internal Server Error';
-    const code = error.code;
-    const data = error.data;
-    res.status(status).json({ ok: false, error: { status, code, message, data } });
-  }
-```
-
-EX:
-
-```
-@Configuration()
-class SampleConfiguration extends DefaultApplicationConfiguration {
-  constructor() {
-    super();
-  }
-
-  // config your hanlders if needed
-  configure(bakkuConfiguration: IBakkuConfiguration): IBakkuConfiguration {
-    super
-      .configure(bakkuConfiguration)
-      .setErrorHandlerGlobal(this.getErrorHandler());
-    return bakkuConfiguration;
-  }
-
-   private getErrorHandler() {
-    return (error: IBakkuHttpError, _req: Request, res: Response, _next: NextFunction): void => {
-      // apply your logic
-      // EX: logger.error('Error  ===========', error);;
-      //
-      const status = error.status || 500;
-      const message = status < 500 ? error.message : 'Internal Server Error';
-      const code = error.code;
-      const data = error.data;
-      res.status(status).json({ status, code, message, data });
-    };
-  }
+}
 ```
 
 ### 2.8 setResponseDataHandlerGlobal(responseDataHandlerGlobal: ResponseDataHandler): IBakkuConfiguration
@@ -354,18 +316,19 @@ class SampleConfiguration extends DefaultApplicationConfiguration {
     super();
   }
 
-  // config your hanlders if needed
+  // config your handlers if needed
   configure(bakkuConfiguration: IBakkuConfiguration): IBakkuConfiguration {
     super
       .configure(bakkuConfiguration)
       .setResponseDataHandlerGlobal((data: any, res: Response) => {
         // do somethings
         res.status(200).send({ ok: true, data });
-        // or custome response data format
+        // or custom response data format
         // res.status(200).send(data);
       });
     return bakkuConfiguration;
   }
+}
 ```
 
 if you change the response format, [refer this for more customization](./customization.md)
@@ -384,7 +347,7 @@ if you change the response format, [refer this for more customization](./customi
 - default empty, the document page is not generate.
 - must include `setDocumentPath(documentPath: string): IBakkuConfiguration`
 - in `DefaultApplicationConfiguration`, the default handler is
-- Recomend use `DocumentRouter.getDocumentHandler(existedApis, docPath)` for handling document data. You can use your handler, but it can make failed data, or not correct.
+- Recommend use `DocumentRouter.getDocumentHandler(existedApis, docPath)` for handling document data. You can use your handler, but it can make failed data, or not correct.
 
 ```
 (existedApis: ControllerMethodPath) => DocumentRouter.getDocumentHandler(existedApis, docPath);
@@ -401,7 +364,7 @@ class SampleConfiguration extends DefaultApplicationConfiguration {
     super();
   }
 
-  // config your hanlders if needed
+  // config your handlers if needed
   configure(bakkuConfiguration: IBakkuConfiguration): IBakkuConfiguration {
     super
       .configure(bakkuConfiguration)
@@ -421,14 +384,14 @@ class SampleConfiguration extends DefaultApplicationConfiguration {
 - config path for swagger URL (API document), use to generate swagger page.
 - default empty, the swagger page is not generate.
 - must include `setGenerateSwaggerDocumentHandlers(handlers: GenerateDocumentHandler): IBakkuConfiguration`
-- Recommend use `convertToSwaggerJson(existedApis)` for convert to Swaager Json Data (version 3). You can change it if you use different swwager, or other document generation.
+- Recommend use `convertToSwaggerJson(existedApis)` for convert to Swagger Json Data (version 3). You can change it if you use different swagger, or other document generation.
 - after swaggerJson is generated, you can add more [securitySchemes](https://swagger.io/specification/#security-scheme-object) `swaggerJson.components.securitySchemes` if needed.
 
 [refer this for more customization](./customization.md)
 
 ### 2.12 setGenerateSwaggerDocumentHandlers(handlers: GenerateDocumentHandler): IBakkuConfiguration
 
-- config way to convert to swagger content for swwager page.
+- config way to convert to swagger content for swagger page.
 - default empty, the swagger page is not generate.
 - must include `setSwaggerDocumentPath(swaggerPath: string): IBakkuConfiguration`
 
@@ -443,7 +406,7 @@ class SampleConfiguration extends DefaultApplicationConfiguration {
     super();
   }
 
-  // config your hanlders if needed
+  // config your handlers if needed
   configure(bakkuConfiguration: IBakkuConfiguration): IBakkuConfiguration {
     super
       .configure(bakkuConfiguration)
@@ -475,7 +438,7 @@ class SampleConfiguration extends DefaultApplicationConfiguration {
 | name           | type                         | required | default | description                                                           |
 | :------------- | :--------------------------- | :------- | :------ | :-------------------------------------------------------------------- |
 | getAppliedPath | function: string or string[] | NO       |         | return path or list path will apply this filter, empty mean all paths |
-| getHandler     | fucntion: RequestHandler     | yes      | 8080    | handler will be apply for listed paths or all paths                   |
+| getHandler     | function: RequestHandler     | yes      | 8080    | handler will be apply for listed paths or all paths                   |
 
 ```
 @Configuration()
@@ -484,7 +447,7 @@ class SampleConfiguration extends DefaultApplicationConfiguration {
     super();
   }
 
-  // config your hanlders if needed
+  // config your handlers if needed
   configure(bakkuConfiguration: IBakkuConfiguration): IBakkuConfiguration {
     super
       .configure(bakkuConfiguration)
@@ -537,8 +500,8 @@ class AuthorizedUserFilter implements IApplicationFilter {
 
 ```
 // EX:  disable x-powered-by
-BakkuFramework.getBakkuFramework().getExpressApp().disable('x-powered-by');
-// setting other with BakkuFramework.getBakkuFramework().getExpressApp() if need
+BakkuFramework..getExpressApp().disable('x-powered-by');
+// setting other with BakkuFramework..getExpressApp() if need
 
 ```
 
@@ -548,8 +511,8 @@ BakkuFramework.getBakkuFramework().getExpressApp().disable('x-powered-by');
 import ejs from 'ejs';
 ejs.delimiter = '@';
 // EX: setting server side render via ejs
-BakkuFramework.getBakkuFramework().getExpressApp().engine('html', ejs.renderFile);
-BakkuFramework.getBakkuFramework().getExpressApp().set('views', path.join(__dirname, 'views'));
+BakkuFramework..getExpressApp().engine('html', ejs.renderFile);
+BakkuFramework..getExpressApp().set('views', path.join(__dirname, 'views'));
 
 
 //

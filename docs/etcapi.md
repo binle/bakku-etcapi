@@ -28,7 +28,7 @@ class DemoApplication {
 ```
 import {BakkuFramework} from '@bakku/etcapi';
 
-BakkuFramework.start(); ==> locahost:8080
+BakkuFramework.start(); ==> localhost:8080
 
 ```
 
@@ -69,11 +69,11 @@ class DemoApplication implement IApplication {
 }
 ```
 
-# 3 Environment, resouces
+# 3 Environment, resources
 
-- By default, you can set the resource config to the evironment of nodejs(process.env), refer - [environment-variables-from-nodejs](https://nodejs.org/en/learn/command-line/how-to-read-environment-variables-from-nodejs)
+- By default, you can set the resource config to the environment of nodejs(process.env), refer - [environment-variables-from-nodejs](https://nodejs.org/en/learn/command-line/how-to-read-environment-variables-from-nodejs)
 
-- Use resouce json file, use RESOURCE_FILE_PATH in node environment (process.env.RESOURCE_FILE_PATH). When you pass this property in node environment, we will prefer to read the data from `RESOURCE_FILE_PATH`. Note: It has been json file.
-- ![Request Response](./bakku-etcapi-resoucepng.png)
+- Use resource json file, use RESOURCE_FILE_PATH in node environment (process.env.RESOURCE_FILE_PATH). When you pass this property in node environment, we will prefer to read the data from `RESOURCE_FILE_PATH`. Note: It has been json file.
+- ![Request Response](./bakku-etcapi-resource.png)
 
 - The resource data will be keep `BakkuFramework.getResourceData()`
