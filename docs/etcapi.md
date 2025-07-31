@@ -74,6 +74,8 @@ class DemoApplication implement IApplication {
 - By default, you can set the resource config to the environment of nodejs(process.env), refer - [environment-variables-from-nodejs](https://nodejs.org/en/learn/command-line/how-to-read-environment-variables-from-nodejs)
 
 - Use resource json file, use RESOURCE_FILE_PATH in node environment (process.env.RESOURCE_FILE_PATH). When you pass this property in node environment, we will prefer to read the data from `RESOURCE_FILE_PATH`. Note: It has been json file.
-- ![Request Response](./bakku-etcapi-resource.png)
+  ![Request Response](./bakku-etcapi-resource.png)
 
 - The resource data will be keep `BakkuFramework.getResourceData()`
+
+- Example: `RESOURCE_FILE_PATH='./resource/dev.json' node start ./dist/index.js`
